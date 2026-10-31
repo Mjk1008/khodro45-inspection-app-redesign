@@ -1,0 +1,154 @@
+[
+    {
+        "name": "ceiling",
+        "left": 0.346,
+        "top": 0.405,
+        "height": 0.34,
+        "width": 0.32,
+        "rotate": null
+    },
+    {
+        "name": "engine-door",
+        "left": 0.32,
+        "top": 0.135,
+        "height": 0.18,
+        "width": 0.37,
+        "rotate": null
+    },
+    {
+        "name": "middle-right-column",
+        "left": 0.68,
+        "top": 0.533,
+        "height": 0.016,
+        "width": 0.1,
+        "rotate": -90
+    },
+    {
+        "name": "middle-left-column",
+        "left": 0.23,
+        "top": 0.530,
+        "height": 0.021,
+        "width": 0.1,
+        "rotate": 90
+    },
+    {
+        "name": "rear-bumper",
+        "left": 0.31,
+        "top": 0.915,
+        "height": 0.095,
+        "width": 0.41,
+        "rotate": null
+    },
+    {
+        "name": "front-bumper",
+        "left": 0.31,
+        "top": 0.014,
+        "height": 0.1,
+        "width": 0.42,
+        "rotate": null
+    },
+    {
+        "name": "front-left-door",
+        "left": 0.075,
+        "top": 0.345,
+        "height": 0.19,
+        "width": 0.155,
+        "rotate": 90
+    },
+    {
+        "name": "front-right-door",
+        "left": 0.78,
+        "top": 0.341,
+        "height": 0.195,
+        "width": 0.158,
+        "rotate": -90
+    },
+    {
+        "name": "rear-right-fender",
+        "left": 0.77,
+        "top": 0.62,
+        "height": 0.157,
+        "width": 0.168,
+        "rotate": -90
+    },
+    {
+        "name": "rear-left-fender",
+        "left": 0.073,
+        "top": 0.62,
+        "height": 0.157,
+        "width": 0.168,
+        "rotate": 90
+    },
+    {
+        "name": "rear-left-column",
+        "left": 0.227,
+        "top": 0.675,
+        "height": 0.1,
+        "width": 0.08,
+        "rotate": 90
+    },
+    {
+        "name": "rear-right-column",
+        "left": 0.71,
+        "top": 0.675,
+        "height": 0.1,
+        "width": 0.08,
+        "rotate": -90
+    },
+    {
+        "name": "rear-left-door",
+        "left": 0.075,
+        "top": 0.525,
+        "height": 0.175,
+        "width": 0.167,
+        "rotate": 90
+    },
+    {
+        "name": "rear-right-door",
+        "left": 0.77,
+        "top": 0.525,
+        "height": 0.175,
+        "width": 0.167,
+        "rotate": -90
+    },
+    {
+        "name": "front-right-fender",
+        "left": 0.783,
+        "top": 0.195,
+        "height": 0.155,
+        "width": 0.155,
+        "rotate": -90
+    },
+    {
+        "name": "front-left-fender",
+        "left": 0.073,
+        "top": 0.195,
+        "height": 0.155,
+        "width": 0.155,
+        "rotate": 90
+    },
+    {
+        "name": "front-right-column",
+        "left": 0.697,
+        "top": 0.32,
+        "height": 0.13,
+        "width": 0.091,
+        "rotate": -90
+    },
+    {
+        "name": "front-left-column",
+        "left": 0.22,
+        "top": 0.32,
+        "height": 0.13,
+        "width": 0.095,
+        "rotate": 90
+    },
+    {
+        "name": "trunk-door",
+        "left": 0.309,
+        "top": 0.815,
+        "height": 0.069,
+        "width": 0.395,
+        "rotate": null
+    }
+]

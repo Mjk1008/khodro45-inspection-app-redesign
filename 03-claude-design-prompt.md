@@ -1,9 +1,10 @@
 # Claude Design: Prompt for the Inspection App Redesign
 
 **How to use**
-1. Open Claude Design. Attach `00-READ-FIRST-full-context.md` (this repo's docs in one file). Optional but strongly recommended: 8–10 screenshots of the current app (Home list, Inspection hub, Photos grid, Camera, Segment, Car diagram, AI QC panel, Final approval, Login, Profile). **No screenshots of the running app were available when this was written.**
-2. Paste **Prompt 1** and review. Then paste Prompts 2–6 one at a time; look before you stack.
-3. Source of truth: `02-redesign-spec.md` (what and why) and `01-current-state-reference.md` (what exists). If a prompt conflicts with the spec, follow the spec and say so.
+1. Claude Design is connected to this GitHub repo, so nothing needs to be attached. Tell it: *"Read START-HERE.md in this repo and follow it. Start with Prompt 1."*
+2. No screenshots of the current app exist; `04-current-screens-wireframes.md` and `assets/` replace them.
+3. Paste **Prompt 1** (or just point to it), review, then Prompts 2-6 one at a time; look before you stack.
+4. Source of truth: `02-redesign-spec.md`. If a prompt conflicts with the spec, follow the spec and say so.
 
 ---
 
@@ -11,7 +12,7 @@
 
 ```
 READ FIRST
-Attached: 00-READ-FIRST-full-context.md. It holds the current-state reference of our internal inspector
+Repo files START-HERE.md, 01-current-state-reference.md, 02-redesign-spec.md, 04-current-screens-wireframes.md and appendix/ hold the current-state reference of our internal inspector
 app (from source code) and the redesign spec. Read all of it before designing. Treat the spec as the source
 of truth. If anything below conflicts with it, follow the spec and tell me.
 

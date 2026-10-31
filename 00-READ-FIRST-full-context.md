@@ -1,9 +1,6 @@
 # READ FIRST: full context for the Inspection App redesign
 
-Contents: README, 01 current-state reference, 02 redesign spec. Detailed code notes live in the repo's appendix/ folder.
-
 ---
-
 # Khodro45 Inspection App Redesign
 
 Working docs for redesigning the internal inspector/supervisor app ("Copilot Inspection", Flutter) using the same design system and AI grammar as the seller wizard redesign.
@@ -12,8 +9,12 @@ Working docs for redesigning the internal inspector/supervisor app ("Copilot Ins
 |---|---|
 | [01-current-state-reference.md](01-current-state-reference.md) | What the app does today, from reading the full source: flow, screens, rules to preserve, defects and risks, open questions |
 | [02-redesign-spec.md](02-redesign-spec.md) | PRD v0.1: problem, metrics, principles, design system, flow, per-screen specs, AI grammar, decisions D1-D9, releases R0-R4, acceptance checklist |
-| [03-claude-design-prompt.md](03-claude-design-prompt.md) | **Start here for design:** Prompt 1 (master) and Prompts 2-6, how to run them |
+| [03-claude-design-prompt.md](03-claude-design-prompt.md) | Prompts for design: Prompt 1 (master) and Prompts 2-6, how to run them |
 | [00-READ-FIRST-full-context.md](00-READ-FIRST-full-context.md) | All of the above in one file to attach to Claude Design |
+| [START-HERE.md](START-HERE.md) | **Instructions for Claude Design** (reading order, assets, rules, where to put output) |
+| [04-current-screens-wireframes.md](04-current-screens-wireframes.md) | Current screens as text wireframes (no screenshots exist) |
+| [assets/](assets/) | Real app SVGs: car-part panels, camera guides, logos, hit-box JSON |
+| [reference/seller-wizard/](reference/seller-wizard/) | Six seller-wizard screenshots for the visual language |
 | [appendix/](appendix/) | Three detailed code notes with file:line citations (A shell/lists/profile, B hub/forms/defects, C photos/diagram/final approval) |
 
 **Related:** the seller wizard redesign (`khodro45-wizard-redesign`) is the source of the colour roles, AI grammar, motion and accessibility rules.
@@ -21,9 +22,33 @@ Working docs for redesigning the internal inspector/supervisor app ("Copilot Ins
 **Sources:** the app's source code only (read 2026-10-31). No screenshots, analytics, interviews or production data. Items not confirmed internally are labelled **[Assumption]** or **[Inference]**. The source folder (including its keystore and key.properties) is **not** in this repo.
 
 **Confidential:** internal product. Keep this repo private.
-
 ---
+# START HERE (instructions for Claude Design)
 
+You are designing the redesign of Khodro45's internal inspector app. Everything you need is in this repository. There are **no screenshots of the current app**; use the text wireframes and the assets.
+
+## Read in this order
+1. `03-claude-design-prompt.md` → **Prompt 1 (master)**: role, mission, principles, design system, deliverables. Follow it exactly.
+2. `02-redesign-spec.md` → source of truth (principles, tokens, flow, per-screen specs in §7, AI grammar §8, decisions §9, acceptance checklist §12).
+3. `01-current-state-reference.md` → what exists today, rules that must not break, risks.
+4. `04-current-screens-wireframes.md` → the current screens as text wireframes (what you are replacing).
+5. `appendix/` → file:line detail when you need exact copy, states or rules.
+
+## Assets you can reuse (real app files)
+- `assets/car-parts/` 19 body-panel SVGs (+ `_red` variants) and `assets/data/car_svg_part_pixel.json` (panel hit-box geometry as fractions of the diagram).
+- `assets/camera-guides/` 19 white outline guides used over the viewfinder (front, sides, corners, tyre, engine, boot, console, 360).
+- `assets/brand/` Khodro45 logo, AI45 mark, plate graphic, plate-cover sticker.
+- `reference/seller-wizard/` six screenshots of the seller-wizard redesign's source product, for the visual language (AI purple, orange actions, range card). Take the *grammar*, not the layouts.
+
+## Rules
+- Persian, RTL, mobile 375×812 (camera landscape). Orange = action, green = done, purple = AI, red = error/blocking, amber = attention.
+- Redraw the app's UI; do not invent business rules. Server-driven content (segments, components, defects, form fields) must stay data-driven in the design (show realistic example data).
+- Where the spec lists a **[Decision] D1–D9**, show the default and the main alternative.
+- Do the work in the order of the prompts (1 → 6). Finish and show Prompt 1 deliverables first, then wait for feedback.
+
+## Output
+Put design output in `design/` in this repo (HTML/Figma export, component sheet, token table, copy deck). Name files by prompt number (e.g. `design/01-system-and-directions/`).
+---
 # Inspection App: Current-State Reference
 
 **What this is:** the map of today's internal inspector app ("Copilot Inspection", Flutter + GetX), built by reading the full source on 2026-10-31. Source of truth for *what exists*. The redesign spec ([02](02-redesign-spec.md)) says what changes.
@@ -153,9 +178,125 @@ Profile: stats (today / month / re-inspection % / average time), branches, my in
 6. What do cancel reasons 40 / 116 / 119 / 121 mean in business terms?
 7. How many inspectors use onsite mode vs branch mode, and what devices (screen size, Android version)?
 8. Where is VIN captured, if at all?
-
 ---
+# Current screens as text wireframes (no screenshots exist)
 
+Derived from the source code, so layout, sizes and copy are accurate to the code but not seen on a device. RTL: the first item in a row is on the **right**. Colours are today's. Use these to understand what is being replaced; do **not** copy the look.
+
+## Home: list card (one car)
+```
+┌───────────────────────────────────────────┐ white, radius 8, faint shadow, bg #F6F6F6
+│ ( در انتظار کارشناسی )  pill 11px, cream  │
+│ [logo 32]  1402 | 206 | پژو     16px bold │  "year | model | brand" (reversed order, LRM hack)
+│ 📅 شناسه 123456            [ plate 130w ] │
+│ 📍 شعبه ...                               │
+│ 👤 نام مالک                  12/08 - 14:30│  no year
+│ [ شروع کارشناسی ]  [📍]  [ گزارش کارشناسی ]│  buttons 12px padding, mixed heights
+└───────────────────────────────────────────┘
+Tabs above: Row of 12px labels, left-packed, count pill (dark grey if unselected), underline 2px
+Filter (tab 2): segmented "در انتظار کارشناسی" (orange) | "در حال کارشناسی" (blue)
+Search: field + separate tiny "جستجو" button
+Empty = error = same Lottie + "موردی یافت نشد!" + "بازخوانی صفحه"
+```
+
+## Inspection hub (SegmentScreen)
+```
+AppBar: car name + help      bg #F6F6F6, padding 24
+[ شماره پذیرش : 123456 ]  [status chip]
+┌ [icon 56] مدارک                    ‹ ┐  supervisor only (hidden for inspector)
+┌ [icon 56] اطلاعات خودرو            ‹ ┐
+┌ [icon 56] جزئیات خودرو             ‹ ┐  supervisor only
+┌ [icon 56] تصاویر + ویدیوها   ۶۵٪   ‹ ┐  only progress number on the page
+┌ [icon 56] کارکرد                   ‹ ┐
+┌──────────┐ ┌──────────┐   2-col grid, server segments (موتور، بدنه و لاستیک …)
+│ icon     │ │ icon     │   ★ rate · ✓ n (components WITHOUT defect, incl. unopened) · ✗ n
+│ title    │ │ title    │
+└──────────┘ └──────────┘
+[ لغو کارشناسی ] red card, supervisor only
+Bottom bar: ⏱ 18:32 (red, 18px)        [ پایان کارشناسی ]
+Empty/error: blank white
+```
+
+## Photos grid
+```
+AppBar: car name
+chips: همه | بیرونی | داخلی | …
+[ ===== عکاسی سریع ===== ]  full-width primary button
+           ── یا ──
+نمای جلو *                         (title 18)
+┌────────┐ ┌────────┐     2 columns, 180px tall, dotted border, red when required-missing
+│ ✎(32px)│ │  guide │     uploaded: thumbnail + 32px edit chip top-left
+│ thumb  │ │  icon  │     uploading: scrim + % ring · failed: 28px retry icon
+└────────┘ └────────┘
+Bottom bar: ⏱  [ ثبت اطلاعات ]  (disabled until required done)
+```
+
+## Guided camera (landscape)
+```
+[flash]            ┌──────────────────────────┐          (empty 56px spacer)
+                   │  viewfinder 4:3          │
+[back]             │  white outline guide     │          [skip if can_skip]
+                   │      ( shutter 88 )      │
+                   │  pill: "نمای جلو | 3/20" │
+                   └──────────────────────────┘
+Video slots (360, engine-video): shutter red, 30 s countdown
+Errors (size/ratio/duration): silent
+```
+
+## Segment: component and defect
+```
+chips (categories) + search
+▼ بدنه و لاستیک   (3)            accordion cards, icon tile 40px, orange count badge
+   [ عکاسی سریع نواقص ماشین ]    body segment only, opens the diagram (replaces this page)
+   ▸ درب جلو راست (1)       🛡
+        توضیحات [__________]     disabled once any defect is on
+        ○ خط و خش   ●(red dot)  ✎    switch coloured by severity_color
+        نکات [____]   [+ add media 40px dashed]   (3-col thumbs)
+        شدت آسیب  ▢▢▢▢▢   مساحت آسیب  ▢▢▢▢▢    (after a photo; body & tire only)   [ تایید ]
+[ ثبت اطلاعات ]  → validate; 4xx → same page in "incomplete only" mode
+```
+
+## Car diagram
+```
+AppBar: نواقص ماشین  ⓘ(24px)
+top-down car (CustomPaint, full width, 6,952-line painter)
+  19 panels tappable (min 32px), 2 mirrors, 4 wheels; markers 24px severity colour; replaced panels pink
+legend: قابل انتخاب | غیرقابل انتخاب | شیشه
+لیست اجزا: components not on the map (tap leaves the diagram)
+tap panel → sheet: choose component → choose defect → TRACE screen (finger-draw on a single panel, grey bg)
+   → photo sheet (photo required, annotation editor forced) → severity/area rails
+```
+
+## AI QC panel
+```
+AppBar: AI45 logo
+analyzing: spinner (orange), "در حال بررسی تصاویر آپلود شده", 10 s countdown (+4×5 s)
+results: "تصاویر نیازمند بررسی"
+┌ [thumb 120×90]  chips: عدم تطابق تصویر | پلاک نمایان | وجود شخص در تصویر (advisory) ┐
+│ [آپلود مجدد] [تایید است] [افزودن لوگوی پلاک]   buttons 36px, text 11px                │
+bottom: [ ادامه ]  or  [ بررسی همه تصاویر الزامی است ] (looks enabled, does nothing)
+failed: "بررسی تصاویر ناموفق بود" [تلاش مجدد] [ادامه بدون بررسی]
+```
+
+## Final approval (supervisor)
+```
+AppBar: تایید نهایی
+مشکلات عکس‌های کارشناسی      [thumb 56] title                 [تایید] 36px → [تایید شد ✓]
+مدارک                       [thumb 56] برگه سبز · reason · AI value · [ویرایش/آپلود مجدد] [ثبت]
+تایید تریم و آپشن            question sheet auto-opens; mismatch card; «ثبت اصلاح روی کارشناسی»
+sticky: [ انتشار ] orange (disabled until all acked)
+        [ عدم انتشار ]  [ برگشت به کارشناسی ]   (look identical)
+        "برای مشاهده قیمت به بک آفیس مراجعه کنید"
+انتشار → no confirm → auction starts in 35 s
+```
+
+## Login
+```
+logo · «ورود» 24px · [نام کاربری یا کد پرسنلی] · [رمز عبور] (no show toggle)
+[ ورود ] · فراموشی رمز عبور › · (staging) تغییر سرور
+wrong password: no message
+```
+---
 # Inspection App Redesign: Spec (PRD v0.1)
 
 **Status:** draft for review · **Date:** 2026-10-31 · **Author:** AI PM (Khodro45)
